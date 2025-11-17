@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/global.css";
 
 const CreateSale = () => {
   const [amount, setAmount] = useState("");
@@ -31,12 +32,12 @@ const CreateSale = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Registrar Venta</h2>
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Monto: </label>
+          <label>Monto:</label>
           <input
             type="number"
             value={amount}
@@ -46,7 +47,7 @@ const CreateSale = () => {
         </div>
 
         <div>
-          <label>ID Cliente: </label>
+          <label>ID Cliente:</label>
           <input
             type="number"
             value={idCustomer}
@@ -58,7 +59,11 @@ const CreateSale = () => {
         <button type="submit">Guardar Venta</button>
       </form>
 
-      {message && <p>{message}</p>}
+      {message && (
+        <p className={message.includes("éxito") ? "success" : "error"}>
+          {message}
+        </p>
+      )}
     </div>
   );
 };

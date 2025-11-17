@@ -9,12 +9,14 @@ import CreateSale from "./components/CreateSale.jsx";
 import SalesList from "./components/SalesList.jsx";
 import SearchCustomer from "./components/SearchCustomer.jsx";
 import SalesReport from "./components/SalesReport.jsx";
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard.jsx";
+
 
 const App = () => (
   <Router>
+    <Navbar />
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/protected" element={<Protected />} />
 
       <Route path="/customers" element={<CustomerList />} />
@@ -22,6 +24,8 @@ const App = () => (
       <Route path="/sales" element={<SalesList />} />
       <Route path="/customers/search" element={<SearchCustomer />} />
       <Route path="/sales/report" element={<SalesReport />} />
+      <Route path="/" element={<Dashboard />} />
+
     </Routes>
   </Router>
 );

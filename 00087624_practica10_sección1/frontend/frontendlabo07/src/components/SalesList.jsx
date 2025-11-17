@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/global.css";
 
 const SalesList = () => {
   const [sales, setSales] = useState([]);
@@ -11,10 +12,10 @@ const SalesList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Listado de Ventas</h2>
 
-      <table border="1">
+      <table>
         <thead>
           <tr>
             <th>ID Venta</th>
@@ -35,7 +36,6 @@ const SalesList = () => {
           ))}
         </tbody>
       </table>
-
     </div>
   );
 };

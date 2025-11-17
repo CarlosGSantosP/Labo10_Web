@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/global.css";
 
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
@@ -11,10 +12,10 @@ export default function CustomerList() {
   }, []);
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Lista de Clientes</h2>
 
-      <table border="1" cellPadding="6">
+      <table>
         <thead>
           <tr>
             <th>ID</th>

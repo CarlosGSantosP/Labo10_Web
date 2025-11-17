@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/global.css";
 
 const SearchCustomer = () => {
   const [code, setCode] = useState("");
@@ -26,7 +27,7 @@ const SearchCustomer = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Buscar Cliente por Código</h2>
 
       <form onSubmit={handleSearch}>
@@ -42,7 +43,7 @@ const SearchCustomer = () => {
       <br />
 
       {results.length > 0 ? (
-        <table border="1">
+        <table>
           <thead>
             <tr>
               <th>ID</th>
@@ -65,7 +66,7 @@ const SearchCustomer = () => {
           </tbody>
         </table>
       ) : (
-        <p>No hay resultados...</p>
+        <p className="error">No hay resultados...</p>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/global.css";
 
 const SalesReport = () => {
   const [report, setReport] = useState([]);
@@ -11,10 +12,10 @@ const SalesReport = () => {
   }, []);
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Reporte de Ventas por Cliente</h2>
 
-      <table border="1">
+      <table>
         <thead>
           <tr>
             <th>Cliente</th>
@@ -31,6 +32,7 @@ const SalesReport = () => {
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
