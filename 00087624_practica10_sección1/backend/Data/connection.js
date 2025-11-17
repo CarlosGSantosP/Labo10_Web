@@ -1,12 +1,10 @@
 import pkg from "pg";
-import dotenv from "dotenv";
-dotenv.config();
-
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
-
 const { Pool } = pkg;
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  user: 'neondb_owner',
+  host: 'ep-curly-sound-ahcrxe5b-pooler.c-3.us-east-1.aws.neon.tech',
+  database: 'neondb',
+  password: 'npg_WUmQdXwNZ2f6',
   ssl: { rejectUnauthorized: false },
 });
