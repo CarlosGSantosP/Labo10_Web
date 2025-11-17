@@ -1,31 +1,53 @@
-// src/Login.js
-import { useState } from "react";
-import API from "./utils/api.js";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await API.post("/signin", { email, password });
-      localStorage.setItem("token", response.data.token);
-      alert("Login successful!");
-    } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong!");
+
+    const res = await fetch("http://localhost:3100/api/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data._jwt);
+      navigate("/dashboard");
+    } else {
+      alert(data.message || "Error en login");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
-  );
-};
+    <div className="login-container">
+      <h2>Iniciar Sesión</h2>
 
-export default Login;
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Entrar</button>
+      </form>
+
+      <p>¿No tienes cuenta? <a href="/signup">Crear cuenta</a></p>
+    </div>
+  );
+}

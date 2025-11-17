@@ -1,33 +1,88 @@
-// src/ app.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Login.jsx";
-import Protected from "./Protected.jsx";
+
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Dashboard from "./Dashboard";
 
 import CustomerList from "./components/CustomerList";
-import CreateSale from "./components/CreateSale.jsx";
-import SalesList from "./components/SalesList.jsx";
-import SearchCustomer from "./components/SearchCustomer.jsx";
-import SalesReport from "./components/SalesReport.jsx";
-import Navbar from "./components/Navbar";
-import Dashboard from "./components/Dashboard.jsx";
+import CreateSale from "./components/CreateSale";
+import SalesList from "./components/SalesList";
+import SearchCustomer from "./components/SearchCustomer";
+import SalesReport from "./components/SalesReport";
 
+import ProtectedRoute from "./ProtectedRoute";
 
-const App = () => (
-  <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/protected" element={<Protected />} />
+function App() {
+  return (
+    <Router>
+      <Routes>
 
-      <Route path="/customers" element={<CustomerList />} />
-      <Route path="/sales/create" element={<CreateSale />} />
-      <Route path="/sales" element={<SalesList />} />
-      <Route path="/customers/search" element={<SearchCustomer />} />
-      <Route path="/sales/report" element={<SalesReport />} />
-      <Route path="/" element={<Dashboard />} />
+        {/* Rutas públicas */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-    </Routes>
-  </Router>
-);
+        {/* Rutas protegidas */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/customers"
+          element={
+            <ProtectedRoute>
+              <CustomerList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/customers/search"
+          element={
+            <ProtectedRoute>
+              <SearchCustomer />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/sales"
+          element={
+            <ProtectedRoute>
+              <SalesList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/sales/create"
+          element={
+            <ProtectedRoute>
+              <CreateSale />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/sales/report"
+          element={
+            <ProtectedRoute>
+              <SalesReport />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Si no existe ruta → redirige a login */}
+        <Route path="*" element={<Login />} />
+
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
